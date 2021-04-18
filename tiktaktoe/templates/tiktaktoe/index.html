@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of available games</title>
+</head>
+<body>
+{% if latest_question_list %}
+    <ul>
+    {% for game in games %}
+        <li><a href="/games/{{ game.id }}/">{{ game.start }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No old games saved.</p>
+    <form action="start_new_game">
+        <button>Start new game</button>
+    </form>
+{% endif %}
+</body>
+</html>
