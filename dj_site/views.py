@@ -8,8 +8,3 @@ def index(request):
 
 def new_game(request):
     return HttpResponse('new game')
-    # return render(
-    #     request=request,
-    #     context={'data': (list() * 3) * 3},
-    #     template_name='./index.html'
-    # )

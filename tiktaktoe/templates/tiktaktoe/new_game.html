@@ -1,49 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>New Game</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>New Game</title>
+    </head>
+    <body>
+    <h1>Start a new game</h1>
+    <div id="app" />
 
-<table align="center" empty-cells="show" min-width="130px">
-    <tr>
-        <td align="center" width="30%" height="20" colspan="1" bgcolor="#A9DBF5">
-            <img src="http://cdn2.iconfinder.com/data/icons/splashyIcons/arrow_large_up.png" width="16" height="16" title="Up" alt="Arrow up" style="display:inline-block;" />
-        </td>
-        <td align="center" width="30%" height="20" colspan="1" bgcolor="#A9DBF5">
-            <img src="http://cdn2.iconfinder.com/data/icons/splashyIcons/arrow_large_up.png" width="16" height="16" title="Up" alt="Arrow up" style="display:inline-block;" />
-        </td>
-        <td align="center" width="30%" height="20" colspan="1" bgcolor="#A9DBF5">
-            <img src="http://cdn2.iconfinder.com/data/icons/splashyIcons/arrow_large_up.png" width="16" height="16" title="Up" alt="Arrow up" style="display:inline-block;" />
-        </td>
+{#    <script>#}
+{#        function sendPost(x, y) {#}
+{#            console.log(x, y);#}
+{#            fetch(`/ttt/update_game/x=${x}&y=${y};"`)#}
+{#                .then((response) => {#}
+{#                    return response.json();#}
+{#                })#}
+{#                .then((data) => {#}
+{#                    console.log(data);#}
+{#                });#}
+{#        }#}
+{#    </script>#}
+{#    <table class="fixed" border="1px">#}
+{#        <tr>#}
+{#            <td width="50px" height="50px" onclick= "sendPost(0, 0)" />#}
+{#            <td width="50px" height="50px" onclick= "sendPost(0, 1)" />#}
+{#            <td width="50px" height="50px" onclick= "sendPost(0, 2)" />#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td width="50px" height="50px" onclick= "sendPost(1, 0)" />#}
+{#            <td width="50px" height="50px" onclick= "sendPost(1, 1)" />#}
+{#            <td width="50px" height="50px" onclick= "sendPost(1, 2)" />#}
+{#        </tr><tr>#}
+{#            <td width="50px" height="50px" onclick= "sendPost(2, 0)" />#}
+{#            <td width="50px" height="50px" onclick= "sendPost(2, 1)" />#}
+{#            <td width="50px" height="50px" onclick= "sendPost(2, 2)" />#}
+{#        </tr>#}
+{#    </table>#}
 
-    </tr>
-    <tr>
-        <td align="center" width="30%" height="20" colspan="3" bgcolor="#A9DBF5">
-            <img src="http://cdn2.iconfinder.com/data/icons/splashyIcons/arrow_large_up.png" width="16" height="16" title="Up" alt="Arrow up" style="display:inline-block;" />
-        </td>
-        <td align="center" width="30%" height="20" colspan="3" bgcolor="#A9DBF5">
-            <img src="http://cdn2.iconfinder.com/data/icons/splashyIcons/arrow_large_up.png" width="16" height="16" title="Up" alt="Arrow up" style="display:inline-block;" />
-        </td>
-        <td align="center" width="30%" height="20" colspan="3" bgcolor="#A9DBF5">
-            <img src="http://cdn2.iconfinder.com/data/icons/splashyIcons/arrow_large_up.png" width="16" height="16" title="Up" alt="Arrow up" style="display:inline-block;" />
-        </td>
-
-    </tr>
-    <tr>
-        <td align="center" width="30%" height="20" colspan="1" bgcolor="#A9DBF5">
-            <img src="http://cdn2.iconfinder.com/data/icons/splashyIcons/arrow_large_up.png" width="16" height="16" title="Up" alt="Arrow up" style="display:inline-block;" />
-        </td>
-        <td align="center" width="30%" height="20" colspan="1" bgcolor="#A9DBF5">
-            <img src="http://cdn2.iconfinder.com/data/icons/splashyIcons/arrow_large_up.png" width="16" height="16" title="Up" alt="Arrow up" style="display:inline-block;" />
-        </td>
-        <td align="center" width="30%" height="20" colspan="1" bgcolor="#A9DBF5">
-            <img src="http://cdn2.iconfinder.com/data/icons/splashyIcons/arrow_large_up.png" width="16" height="16" title="Up" alt="Arrow up" style="display:inline-block;" />
-        </td>
-
-    </tr>
-</table>
-
+    <br />
 </body>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'dist/bundle.js' %}"></script>
 </html>

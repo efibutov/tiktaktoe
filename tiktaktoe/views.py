@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from .models import Game
 
 
@@ -7,18 +7,6 @@ def index(request):
     games = Game.objects.all()
     # return HttpResponse('Hello world')
     return render(request=request, template_name='tiktaktoe/index.html', context={'games': games})
-
-
-def new_game(request):
-    """
-    A new game view
-    """
-    return HttpResponse('new game')
-    # return render(
-    #     request=request,
-    #     context={'data': (list() * 3) * 3},
-    #     template_name='./index.html'
-    # )
 
 
 def old_game(request, game_id):
@@ -33,7 +21,7 @@ def old_games(request):
     )
 
 
-def start_new_game(request):
+def new_game(request):
     return render(
         request=request,
         template_name='tiktaktoe/new_game.html',
