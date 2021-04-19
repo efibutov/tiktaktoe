@@ -17,13 +17,16 @@ class Table extends React.Component {
 
         this.setCellValue = this.setCellValue.bind(this);
         this.createBoard = this.createBoard.bind(this);
-        this.setSymbol = this.setSymbol.bind(this);
     }
 
-    setSymbol(i, j) {
-        console.log(i, j);
-
-        // const boardState = this.state.boardState
+    makeMove() {
+        fetch('http://example.com/movies.json')
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+            });
     }
 
     setCellValue(i, j) {
