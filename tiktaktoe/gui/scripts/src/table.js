@@ -11,20 +11,32 @@ class Table extends React.Component {
         }
 
         this.state = {
-            boardState: board
+            boardState: board,
+            currentLetter: true
         }
 
         this.setCellValue = this.setCellValue.bind(this);
         this.createBoard = this.createBoard.bind(this);
+        this.setSymbol = this.setSymbol.bind(this);
     }
 
-    setCellValue(x, y, value) {
-        const boardState = this.state.boardState;
-        boardState[x][y] = value;
+    setSymbol(i, j) {
+        console.log(i, j);
 
-        this.setState({
-            boardState: boardState
-        })
+        // const boardState = this.state.boardState
+    }
+
+    setCellValue(i, j) {
+        if (this.state.boardState[i][j] === null) {
+            const boardState = this.state.boardState;
+            boardState[i][j] = this.state.currentLetter;
+            const symbol = !this.state.currentLetter;
+
+            this.setState({
+                boardState: boardState,
+                currentLetter: symbol
+            })
+        }
     }
 
     createBoard() {
@@ -39,6 +51,7 @@ class Table extends React.Component {
                         letter={this.state.boardState[i][j]}
                         key = {`${i}_${j}`}
                         coordinates={ {"i": i, "j": j} }
+                        setCellValue={this.setCellValue}
                     />
                 )
             }
