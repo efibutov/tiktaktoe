@@ -38,6 +38,7 @@ class Table extends React.Component {
                     <Cell
                         letter={this.state.boardState[i][j]}
                         key = {`${i}_${j}`}
+                        coordinates={ {"i": i, "j": j} }
                     />
                 )
             }
