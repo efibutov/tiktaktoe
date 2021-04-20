@@ -4,27 +4,30 @@ import Cell from "./cell";
 class Table extends React.Component {
     constructor(props) {
         super(props);
-        const board = Array();
 
+        const board = new Array(3);
         for (let i=0; i<3; ++i) {
-            board[i] = Array(null, null, null);
+            board[i] = new Array(3);
         }
 
         this.state = {
             boardState: board,
-            currentLetter: true
+            currentLetter: false
         }
 
-        this.setCellValue = this.setCellValue.bind(this);
         this.createBoard = this.createBoard.bind(this);
         this.updateBoard = this.updateBoard.bind(this);
+        this.makeMove = this.makeMove.bind(this);
     }
 
     updateBoard(data) {
-        console.log(JSON.stringify(data));
+        this.setState({
+            boardState: data.board
+        });
     }
 
-    makeMove(i, j) {
+    makeMove(coordinates) {
+        const currentLetter = !this.state.currentLetter;
         const endPoint = "/ttt/make_move/";
         const request = {
             method: "POST",
@@ -33,7 +36,11 @@ class Table extends React.Component {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.cookie.csrftoken
             },
-            body: JSON.stringify(this.state.boardState)
+            body: JSON.stringify({
+                board: this.state.boardState,
+                clickOn: coordinates,
+                currentLetter: currentLetter
+            })
         };
 
         fetch(endPoint, request)
@@ -43,12 +50,10 @@ class Table extends React.Component {
             .then((data) => {
                 this.updateBoard(data);
             });
-    }
 
-    setCellValue(coordinates) {
-        const i = coordinates.i;
-        const j = coordinates.j;
-        this.makeMove(i, j);
+        this.setState({
+            currentLetter: currentLetter
+        });
     }
 
     createBoard() {
@@ -63,14 +68,12 @@ class Table extends React.Component {
                         letter={this.state.boardState[i][j]}
                         key = {`${i}_${j}`}
                         coordinates={ {"i": i, "j": j} }
-                        setCellValue={this.setCellValue}
+                        makeMove={this.makeMove}
                     />
                 )
             }
             columns[i] = (
-                <tr key={i}>
-                    {row}
-                </tr>
+                <tr key={i}>{row}</tr>
             );
         }
         return columns;
@@ -84,16 +87,16 @@ class Table extends React.Component {
 
         return (
             <div>
-                <table style={
-                    {tableStyle}
-                }>
+                <table style={{tableStyle}}>
                     <tbody>
                         {this.createBoard()}
                     </tbody>
                 </table>
                 <br />
-                <form action={"old_games.html"}>
-                    <button>Save</button>
+
+                <form action={"/ttt/save_game/"} method={"POST"}>
+                    <button>{"Save"}</button>
+                    <a href={"/ttt/old_games"}>Cancel</a>
                 </form>
             </div>
         )

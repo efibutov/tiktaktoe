@@ -18,7 +18,7 @@ function Cell(props) {
     return (
         <td
             style={style}
-            onClick={() => {props.setCellValue(props.coordinates)}}
+            onClick={() => {props.makeMove(props.coordinates)}}
         >
             <h1>{letter}</h1>
         </td>
