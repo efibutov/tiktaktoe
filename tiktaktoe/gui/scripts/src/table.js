@@ -4,7 +4,7 @@ import Cell from "./cell";
 class Table extends React.Component {
     constructor(props) {
         super(props);
-        const board = new Array(3);
+        const board = Array();
 
         for (let i=0; i<3; ++i) {
             board[i] = Array(null, null, null);
@@ -17,29 +17,38 @@ class Table extends React.Component {
 
         this.setCellValue = this.setCellValue.bind(this);
         this.createBoard = this.createBoard.bind(this);
+        this.updateBoard = this.updateBoard.bind(this);
     }
 
-    makeMove() {
-        fetch('http://example.com/movies.json')
+    updateBoard(data) {
+        console.log(JSON.stringify(data));
+    }
+
+    makeMove(i, j) {
+        const endPoint = "/ttt/make_move/";
+        const request = {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.cookie.csrftoken
+            },
+            body: JSON.stringify(this.state.boardState)
+        };
+
+        fetch(endPoint, request)
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
+                this.updateBoard(data);
             });
     }
 
-    setCellValue(i, j) {
-        if (this.state.boardState[i][j] === null) {
-            const boardState = this.state.boardState;
-            boardState[i][j] = this.state.currentLetter;
-            const symbol = !this.state.currentLetter;
-
-            this.setState({
-                boardState: boardState,
-                currentLetter: symbol
-            })
-        }
+    setCellValue(coordinates) {
+        const i = coordinates.i;
+        const j = coordinates.j;
+        this.makeMove(i, j);
     }
 
     createBoard() {
@@ -87,7 +96,6 @@ class Table extends React.Component {
                     <button>Save</button>
                 </form>
             </div>
-
         )
     }
 }

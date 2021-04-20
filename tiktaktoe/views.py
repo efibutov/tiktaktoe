@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from .models import Game
+import json
 
 
 def index(request):
@@ -27,3 +29,11 @@ def new_game(request):
         template_name='tiktaktoe/new_game.html',
         context=dict()
     )
+
+
+@csrf_exempt
+def make_move(request):
+    print(
+        json.loads(str(request.body, encoding='utf8'))
+    )
+    return JsonResponse({"j": 1})
